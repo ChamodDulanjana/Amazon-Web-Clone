@@ -56,6 +56,32 @@ class Clothing extends Product{
 
 }
 
+export let products = [];
+
+export function loadProducts(fun){
+  $.ajax({
+    url: "https://supersimplebackend.dev/products",
+    type: "GET",
+    dataType: "json",
+    headers: {
+      "content-type": "application/json",
+    },
+    success: (response) => {
+      products = response.map((productDetails) => {
+        if(productDetails.type === 'clothing') {
+          return new Clothing(productDetails);
+        }
+        return new Product(productDetails);
+      });
+      fun();
+    },
+    error: (xhr, status, error) => {
+      console.error("Error status: ", status);
+      console.error("Error details: ", error);
+      console.error("XHR: ", xhr);
+    }
+  });
+}
 
 
 /*const tshirt = new Clothing(
@@ -98,6 +124,7 @@ console.log(tshirt);*/
 
 console.log(product1);*/
 
+/*
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -763,3 +790,4 @@ export const products = [
   }
   return new Product(productDetails);
 });
+*/
