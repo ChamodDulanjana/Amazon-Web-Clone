@@ -3,8 +3,9 @@ import {products, loadProducts} from "../data/products.js";
 
 loadProducts(renderProductsGrid);
 
-function renderProductsGrid() {
 
+function renderProductsGrid() {
+    updateCartQuantity();
     let productHTML = '';
 
     products.forEach(product => {
